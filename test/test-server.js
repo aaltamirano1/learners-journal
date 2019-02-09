@@ -24,5 +24,15 @@ describe('App', function(){
 			});
 			
 	});
+		it("Should give a 200 status code and HTML at the /home", function(){
+		return chai
+			.request(app)
+			.get('/home')
+			.then(function(res){
+				expect(res).to.have.status(200);
+				expect(res).to.be.html;
+			});
+			
+	});
 
 });

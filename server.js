@@ -2,7 +2,13 @@ const express = require('express');
 const app = express();
 app.use(express.static('public'));
 
+app.get('/', function(req, res) {
+    res.sendFile('views/index.html', {root: __dirname })
+});
 
+app.get('/home', function(req, res) {
+    res.sendFile('views/home.html', {root: __dirname })
+});
 
 function runServer() {
   const port = process.env.PORT || 8080;
