@@ -1,12 +1,18 @@
 const chai = require('chai');
 const chaiHttp = require('chai-http');
 
-const { app } = require("../server");
+const { app, runServer, closeServer	} = require("../server");
 
 const expect = chai.expect;
 chai.use(chaiHttp);
 
 describe('App', function(){
+	before(function(){
+		return runServer();
+	});
+	after(function(){
+		return closeServer();
+	});
 
 	it("Should give a 200 status code and HTML at the root URL", function(){
 		return chai
