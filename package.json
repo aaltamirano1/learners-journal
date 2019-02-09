@@ -1,0 +1,14 @@
+{
+  "name": "learners-journal",
+  "version": "1.0.0",
+  "description": "A journal for anyone who is learning something new to track thier progress",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Angel Altamirano",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.16.4"
+  }
+}
