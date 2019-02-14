@@ -1,43 +1,116 @@
+'use strict';
+require('dotenv').config();
 const express = require('express');
+const mongoose = require('mongoose');
+const passport = require('passport');
+const path = require('path');
+
+
+// Here we use destructuring assignment with renaming so the two variables
+// called router (from ./users and ./auth) have different names
+// For example:
+// const actorSurnames = { james: "Stewart", robert: "De Niro" };
+// const { james: jimmy, robert: bobby } = actorSurnames;
+// console.log(jimmy); // Stewart - the variable name is jimmy, not james
+// console.log(bobby); // De Niro - the variable name is bobby, not robert
+const { router: usersRouter } = require('./users');
+const { router: authRouter, localStrategy, jwtStrategy } = require('./auth');
+
+mongoose.Promise = global.Promise;
+
+const { PORT, DATABASE_URL } = require('./config');
+
 const app = express();
-app.use(express.static('public'));
+
+// CORS
+app.use(function (req, res, next) {
+  res.header('Access-Control-Allow-Origin', '*');
+  res.header('Access-Control-Allow-Headers', 'Content-Type,Authorization');
+  res.header('Access-Control-Allow-Methods', 'GET,POST,PUT,PATCH,DELETE');
+  if (req.method === 'OPTIONS') {
+    return res.send(204);
+  }
+  next();
+});
+
+passport.use(localStrategy);
+passport.use(jwtStrategy);
+app.use(express.static(path.join(__dirname, 'public')));
+app.use('/users', usersRouter);
+app.use('/auth', authRouter);
+
+const jwtAuth = passport.authenticate('jwt', { session: false });
 
 app.get('/', function(req, res) {
-    res.sendFile('views/index.html', {root: __dirname })
+    res.sendFile('index.html', {root: __dirname });
 });
 
-app.get('/home', function(req, res) {
-    res.sendFile('views/home.html', {root: __dirname })
+app.get('/signup', function(req, res) {
+    res.sendFile('signup.html', {root: __dirname });
 });
 
-function runServer() {
-  const port = process.env.PORT || 8080;
+
+// A protected endpoint which needs a valid JWT to access it
+app.get('/entries', jwtAuth, (req, res) => {  
+   res.json({data: [
+     {
+       date: 'Feb 9, 2019',
+       workingOn: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
+       feelings: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut consectetur turpis porttitor, volutpat tortor et, dignissim nisi. Donec arcu erat, dignissim vel molestie non, viverra eget leo. Ut vitae est diam.',
+       lookingForward: 'Donec arcu erat, dignissim vel molestie non, viverra eget leo. Ut vitae est diam.'
+     },
+     {
+       date: 'Feb 8, 2019',
+       workingOn: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
+       feelings: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut consectetur turpis porttitor, volutpat tortor et, dignissim nisi. Donec arcu erat, dignissim vel molestie non, viverra eget leo. Ut vitae est diam.',
+       lookingForward: 'Donec arcu erat, dignissim vel molestie non, viverra eget leo. Ut vitae est diam.'
+     }
+   ]});
+});
+
+app.use('*', (req, res) => {
+  return res.status(404).json({ message: 'Not Found' });
+});
+
+// Referenced by both runServer and closeServer. closeServer
+// assumes runServer has run and set `server` to a server object
+let server;
+
+function runServer(databaseUrl, port = PORT) {
+
   return new Promise((resolve, reject) => {
-    server = app
-      .listen(port, () => {
-        console.log(`Your app is listening on port ${port}`);
-        resolve(server);
-      })
-      .on("error", err => {
-        reject(err);
-      });
-  });
-}
-function closeServer() {
-  return new Promise((resolve, reject) => {
-    console.log("Closing server");
-    server.close(err => {
+    mongoose.connect(databaseUrl, err => {
       if (err) {
-        reject(err);
-        // so we don't also call `resolve()`
-        return;
+        return reject(err);
       }
-      resolve();
+      server = app.listen(port, () => {
+        console.log(`Your app is listening on port ${port}`);
+        resolve();
+      })
+        .on('error', err => {
+          mongoose.disconnect();
+          reject(err);
+        });
     });
   });
 }
-if (require.main === module) {
-  runServer().catch(err => console.error(err));
+
+function closeServer() {
+  return mongoose.disconnect().then(() => {
+    return new Promise((resolve, reject) => {
+      console.log('Closing server');
+      server.close(err => {
+        if (err) {
+          return reject(err);
+        }
+        resolve();
+      });
+    });
+  });
 }
 
-module.exports = {app, runServer, closeServer};
+if (require.main === module) {
+  runServer(DATABASE_URL).catch(err => console.error(err));
+}
+
+module.exports = { app, runServer, closeServer };
