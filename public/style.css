@@ -49,6 +49,12 @@ input{
 	margin-bottom: 10px;
 }
 
+textarea{
+	display: block;
+	margin-bottom: 10px;
+	width: 95%;
+}
+
 main{
 	max-width: 800px;
 	margin: auto;

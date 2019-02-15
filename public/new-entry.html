@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Learner's Journal</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.css">
+    <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
+
+    <link rel="stylesheet" href="/style.css">
+  </head>
+  <body>
+ 	 <nav>
+ 	 	<ul>
+ 	 		<li><a class='logout-btn' href="index.html"><button>Log Out</button></a></li>
+ 	 		<li><button>?</button></li>
+ 	 	</ul>
+ 	 </nav>
+    <form id="new-entry">
+      <h1>New Entry</h1>
+      <label for="date-input">Date:</label>
+      <input type="date" name="date" id="date-input">
+      <br>
+      <label for="working-on-input">What are you working on?</label>
+      <textarea name="working-on" id="working-on-input"></textarea>
+      <br>
+      <label for="feelings-input">How do you feel about it?</label>
+      <textarea name="feelings" id="feelings-input"></textarea>
+      <br>
+      <label for="looking-forward-input">What are you looking forward to?</label>
+      <textarea name="looking-forward" id="looking-forward-input"></textarea>
+      <br>
+      <button type="submit">Submit</button>
+    </form>
+        <script
+		  src="https://code.jquery.com/jquery-3.3.1.min.js"
+		  integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+		  crossorigin="anonymous"></script>
+		    <script type="text/javascript" src="new-entry.js"></script>
+ 	</body>
+</html>

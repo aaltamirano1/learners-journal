@@ -2,7 +2,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 
-const {User} = require('./models');
+const {User} = require('./model');
 
 const router = express.Router();
 
@@ -137,5 +137,12 @@ router.get('/', (req, res) => {
     .then(users => res.json(users.map(user => user.serialize())))
     .catch(err => res.status(500).json({message: 'Internal server error'}));
 });
+
+router.get('/id/:username', (req, res) => {
+  return User.findOne({username: req.params.username})
+    .then(user => res.json(user.id))
+    .catch(err => res.status(500).json({message: 'Internal server error'}));
+});
+
 
 module.exports = {router};
