@@ -115,3 +115,5 @@ $(()=>{
 	}
 	watchForm();
 });
+
+module.exports = {watchForm, getToken, getUserId, getEntries, displayError, displayHomePage, changeNavLinks, watchLogoutButton, displayEntry, formatDate};
