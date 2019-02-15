@@ -30,7 +30,6 @@ function postUser(user){
 	});
 }
 
-
 function watchForm(){
 	$('#signup').submit(function(e){
 		e.preventDefault();

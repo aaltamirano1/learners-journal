@@ -1,3 +1,20 @@
+function formatDate(date){
+	const newDate = new Date(date);
+	const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'June', 'July', 'Aug', 'Sept', 'Oct', 'Nov', 'Dec'];
+  return  `${months[newDate.getMonth()]} ${newDate.getDate()}, ${newDate.getFullYear()}`;
+}
+
+function displayEntry(entry){
+	$('.entries').append(`
+		<li>
+ 			<p><em>${formatDate(entry.date)}</em></p>
+ 			<p><strong>Working on:</strong> ${entry.workingOn}</p>
+ 			<p><strong>Feelings on it: </strong> ${entry.feelings}</p>
+ 			<p><strong>Looking forward to:</strong> ${entry.lookingForward}</p>
+ 		</li>
+	`);
+}
+
 function watchLogoutButton(){
 	$('.logout-btn').on('click', function(){
 		localStorage.clear();
@@ -16,23 +33,6 @@ function changeNavLinks(){
 	watchLogoutButton();
 }
 
-function formatDate(date){
-	const newDate = new Date(date);
-	const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'June', 'July', 'Aug', 'Sept', 'Oct', 'Nov', 'Dec'];
-  return  `${months[newDate.getMonth()]} ${newDate.getDate()}, ${newDate.getFullYear()}`;
-}
-
-function displayEntry(entry){
-	$('.entries').append(`
-		<li>
- 			<p><em>${formatDate(entry.date)}</em></p>
- 			<p><strong>Working on:</strong> ${entry.workingOn}</p>
- 			<p><strong>Feelings on it: </strong> ${entry.feelings}</p>
- 			<p><strong>Looking forward to:</strong> ${entry.lookingForward}</p>
- 		</li>
-	`);
-}
-
 function displayHomePage(data){
 	changeNavLinks();
 	$('#login').remove();
@@ -43,6 +43,25 @@ function displayHomePage(data){
 function displayError(){
 	$('.entry').remove();
 	$("h1").after(`<p class="error">Problem with your login information. Please try again.</p>`);
+}
+
+function getEntries(user_id){
+	fetch(`/entries/${user_id}`, {
+		headers: {
+			"Authorization": "Bearer "+localStorage.authToken
+		}
+	})
+	.then(res=>{
+    if (res.ok) {
+      return res.json();
+    }
+    throw new Error(res.statusText);
+	}).then(resJson=>{
+		displayHomePage(resJson);
+	}).catch(err=>{
+		displayError();
+		console.error(err);
+	});
 }
 
 function getUserId(user){
@@ -75,25 +94,6 @@ function getToken(user){
 		localStorage.authToken = data.authToken;
 		getUserId(_user); 
 	})
-}
-
-function getEntries(user_id){
-	fetch(`/entries/${user_id}`, {
-		headers: {
-			"Authorization": "Bearer "+localStorage.authToken
-		}
-	})
-	.then(res=>{
-    if (res.ok) {
-      return res.json();
-    }
-    throw new Error(res.statusText);
-	}).then(resJson=>{
-		displayHomePage(resJson);
-	}).catch(err=>{
-		displayError();
-		console.error(err);
-	});
 }
 
 function watchForm(){
