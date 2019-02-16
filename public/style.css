@@ -109,3 +109,16 @@ main{
 .button-box button{
 	margin: 7px;
 }
+
+.close{
+	color: transparent;
+	background-color: transparent;
+	border: none;
+	width: 100%;
+	display: flex;
+	justify-content: flex-end;
+	font-size: 1.5em;
+}
+.close i{
+	margin: 7px;
+}
