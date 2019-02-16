@@ -13,10 +13,11 @@ function postEntry(entry){
 			'Content-Type': 'application/json',
 			'Authorization': 'Bearer '+localStorage.authToken
 		}
-	}).then(res=>{
-		return res.json();
-	}).then(data=>{
+	})
+	.then(res=> res.json)
+	.then(data=>{
 		console.log(data);
+		location.replace("/index.html");
 	});
 }
 

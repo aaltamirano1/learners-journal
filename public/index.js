@@ -1,6 +1,19 @@
-function watchEditButton(){
-	$('.edit').on('click', function(){
-		
+function watchDeleteButton(){
+	//unbind so click isnt triggered more than once.
+	$('.delete').unbind('click').bind('click', function(e){
+		const id = $(this).attr("data-entry-id");
+		fetch(`/entries/${id}`, {
+			method: "DELETE",
+			headers: {
+				'Content-Type': 'application/json'
+			}
+		}).then(res=>{
+			const message = res.json.message ? ": "+res.json.message : "";
+			console.log(`${res.status}${message}`);
+			window.location.reload();
+		}).catch(err=>{
+			console.error(err);
+		});
 	});
 }
 
@@ -29,6 +42,7 @@ function displayEntry(entry){
  			${buttonSection(entry._id)}
  		</li>
 	`);
+	watchDeleteButton();
 }
 
 function watchLogoutButton(){
@@ -132,5 +146,3 @@ $(()=>{
 	}
 	watchForm();
 });
-
-module.exports = {watchForm, getToken, getUserId, getEntries, displayError, displayHomePage, changeNavLinks, watchLogoutButton, displayEntry, formatDate};

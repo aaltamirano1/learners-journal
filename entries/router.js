@@ -30,7 +30,7 @@ router.post('/', jwtAuth, jsonParser, (req, res)=>{
     .then(post=>res.status(201).json())
     .catch(err => {
       console.error(err);
-      res.status(500).json({ message: "Internal server error" });
+      res.status(500).json({ message: "Internal server error when posting new entry." });
     });        
 
 });
@@ -38,13 +38,25 @@ router.post('/', jwtAuth, jsonParser, (req, res)=>{
 router.get('/', (req, res) => {
   return Entry.find()
     .then(entries => res.json(entries))
-    .catch(err => res.status(500).json({message: 'Internal server error'}));
+    .catch(err => res.status(500).json({message: 'Internal server error when getting entries.'}));
 });
 
 router.get('/:user_id', (req, res) => {
   return Entry.find({user: req.params.user_id})
     .then(entries => res.json(entries))
-    .catch(err => res.status(500).json({message: 'Internal server error'}));
+    .catch(err => res.status(500).json({message: 'Internal server error when getting entry by user id.'}));
+});
+
+router.delete('/:id', (req, res)=>{
+  Entry.findByIdAndRemove(req.params.id)
+    .then(()=>{
+      console.log(`Deleted entry with id ${req.params.id}.`);
+      res.status(204).end();
+    })
+    .catch(err => {
+      console.error(err);
+      res.status(500).json({ message: "Internal server error when deleting entry." });
+    });
 });
 
 module.exports = {router};

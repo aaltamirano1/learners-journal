@@ -8,7 +8,7 @@ const path = require('path');
 const { router: usersRouter } = require('./users');
 const { router: entriesRouter } = require('./entries');
 const { Entry } = require('./entries/model');
-const { router: authRouter, localStrategy } = require('./auth');
+const { router: authRouter, localStrategy, jwtStrategy } = require('./auth');
 
 mongoose.Promise = global.Promise;
 
@@ -28,17 +28,20 @@ app.use(function (req, res, next) {
 });
 
 passport.use(localStrategy);
+passport.use(jwtStrategy);
 app.use(express.static(path.join(__dirname, 'public')));
 app.use('/users', usersRouter);
 app.use('/entries', entriesRouter);
 app.use('/auth', authRouter);
+
+const jwtAuth = passport.authenticate('jwt', { session: false });
 
 app.get('/', function(req, res) {
     res.sendFile('index.html', {root: __dirname });
 });
 
 app.get('/entries/:user_id', (req, res) => {
-  return Entry.find({user: req.params.user_id}).sort({date: -1})
+  return Entry.find({user: req.params.user_id})
     .then(entries => res.json(entries))
     .catch(err => res.status(500).json({message: 'Internal server error'}));
 });
