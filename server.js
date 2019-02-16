@@ -38,7 +38,7 @@ app.get('/', function(req, res) {
 });
 
 app.get('/entries/:user_id', (req, res) => {
-  return Entry.find({user: req.params.user_id})
+  return Entry.find({user: req.params.user_id}).sort({date: -1})
     .then(entries => res.json(entries))
     .catch(err => res.status(500).json({message: 'Internal server error'}));
 });

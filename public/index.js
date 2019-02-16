@@ -1,3 +1,18 @@
+function watchEditButton(){
+	$('.edit').on('click', function(){
+		
+	});
+}
+
+function buttonSection(id){
+	return `
+		<div class="button-box">
+			<button data-entry-id="${id}" class="edit"><i class="fas fa-pencil-alt"></i></button>
+			<button data-entry-id="${id}" class="delete"><i class="fas fa-trash-alt"></i></button>
+		</div>
+	`;
+}
+
 function formatDate(date){
 	const newDate = new Date(date);
 	const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'June', 'July', 'Aug', 'Sept', 'Oct', 'Nov', 'Dec'];
@@ -11,6 +26,7 @@ function displayEntry(entry){
  			<p><strong>Working on:</strong> ${entry.workingOn}</p>
  			<p><strong>Feelings on it: </strong> ${entry.feelings}</p>
  			<p><strong>Looking forward to:</strong> ${entry.lookingForward}</p>
+ 			${buttonSection(entry._id)}
  		</li>
 	`);
 }
@@ -25,6 +41,7 @@ function watchLogoutButton(){
 function changeNavLinks(){
 	$('nav').empty();
 	$('nav').html(`
+		<h1>Learner's Journal</h1>
 		<ul>
  	 		<li><a href="new-entry.html"><button>New Entry</button></a></li>
  	 		<li><a class="logout-btn" href="index.html"><button>Log Out</button></a></li>
