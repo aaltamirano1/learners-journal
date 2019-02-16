@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Learner's Journal</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.css">
+    <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+    <link rel="stylesheet" href="/style.css">
+  </head>
+  <body>
+ 	 <nav>
+    <h1>Learner's Journal</h1>
+ 	 	<ul>
+ 	 		<li><a class='logout-btn' href="index.html"><button>Log Out</button></a></li>
+ 	 		<li><button>?</button></li>
+ 	 	</ul>
+ 	 </nav>
+    <form id="edit-entry">
+      <span class="close"><a href="index.html"><i class="fas fa-times"></i></a></span>
+      <h1>Edit Entry</h1>
+      <span>
+        <label for="date-input">Date:</label>
+        <input type="date" name="date" id="date-input">
+      </span>
+      <br>
+      <label class="left-align-label" for="working-on-input">What are you working on?</label>
+      <textarea name="working-on" id="working-on-input"></textarea>
+      <br>
+      <label class="left-align-label" for="feelings-input">How do you feel about it?</label>
+      <textarea name="feelings" id="feelings-input"></textarea>
+      <br>
+      <label class="left-align-label" for="looking-forward-input">What are you looking forward to?</label>
+      <textarea name="looking-forward" id="looking-forward-input"></textarea>
+      <br>
+      <button type="submit">Submit</button>
+    </form>
+        <script
+		  src="https://code.jquery.com/jquery-3.3.1.min.js"
+		  integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+		  crossorigin="anonymous"></script>
+		    <script type="text/javascript" src="edit-entry.js"></script>
+ 	</body>
+</html>

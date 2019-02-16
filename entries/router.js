@@ -35,6 +35,41 @@ router.post('/', jwtAuth, jsonParser, (req, res)=>{
 
 });
 
+router.put('/:id', jsonParser, (req, res)=>{
+  const requiredFields = ['date', 'workingOn', 'feelings', 'lookingForward'];
+  requiredFields.forEach(field => {
+    if(!(field in req.body)){
+      const msg = `Missing ${field} in request body.`;
+      console.error(msg);
+      return res.status(400).send(msg);
+    }
+  });
+
+  const toUpdate = {};
+  const updatableFields = ['date', 'workingOn', 'feelings', 'lookingForward'];
+  updatableFields.forEach(field=>{
+    if(field in req.body){
+      toUpdate[field] = req.body[field];
+    }
+  });
+
+  Entry
+    .findByIdAndUpdate(req.params.id, {$set: toUpdate})
+    .then(updatedEntry=>{
+      console.log(`Updated item with id ${req.params.id}.`);
+      res.status(200).json({
+        date: updatedEntry.date,
+        workingOn: updatedEntry.workingOn,
+        feelings: updatedEntry.feelings,
+        lookingForward: updatedEntry.lookingForward
+      });
+    })
+    .catch(err => {
+      console.error(err);
+      res.status(500).json({ message: "Internal server error with updating entry." });
+    });
+});
+
 router.get('/', (req, res) => {
   return Entry.find()
     .then(entries => res.json(entries))

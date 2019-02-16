@@ -17,6 +17,14 @@ function watchDeleteButton(){
 	});
 }
 
+function watchEditButton(entry){
+	$('.edit').unbind('click').bind('click', function(e){
+		console.log(entry);
+		localStorage.edit = JSON.stringify(entry);
+		window.location.replace('/edit-entry.html');
+	});
+}
+
 function buttonSection(id){
 	return `
 		<div class="button-box">
@@ -42,6 +50,7 @@ function displayEntry(entry){
  			${buttonSection(entry._id)}
  		</li>
 	`);
+	watchEditButton(entry);
 	watchDeleteButton();
 }
 

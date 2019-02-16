@@ -35,7 +35,6 @@ function watchForm(){
 			lookingForward,
 			user: localStorage.authToken
 		});
-		
 	});
 }
 
