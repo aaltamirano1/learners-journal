@@ -53,8 +53,8 @@ function formatSingleDigits(num){
 function formatDate(jsonDate){
 	const d = new Date(jsonDate);
 
-	let month = formatSingleDigit(d.getMonth()+1);
-	let day = formatSingleDigit(d.getDate()+1);
+	let month = formatSingleDigits(d.getMonth()+1);
+	let day = formatSingleDigits(d.getDate()+1);
 
 	return date = d.getFullYear()+"-"+month+"-"+day;
 }
