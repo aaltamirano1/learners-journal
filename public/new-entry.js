@@ -5,6 +5,10 @@ function watchLogoutButton(){
 	});
 }
 
+function displayError(){
+	$("form h1").after(`<p class="error">There was a problem with one or more off your fields. Please make sure no fields are empty.</p>`);
+}
+
 function postEntry(entry){
 	fetch("/entries", {
 		method: "POST",
@@ -14,10 +18,19 @@ function postEntry(entry){
 			'Authorization': 'Bearer '+localStorage.authToken
 		}
 	})
-	.then(res=> res.json)
+	.then(res=> {
+		if(res.ok){
+			return res.json;
+		}
+		throw new Error(res.statusText);
+	})
 	.then(data=>{
 		console.log(data);
 		location.replace("/index.html");
+	})
+	.catch(err=>{
+		displayError();
+		console.log(err);
 	});
 }
 

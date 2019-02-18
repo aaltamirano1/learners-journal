@@ -8,7 +8,7 @@ function linkToLogin(){
 }
 
 function displayError(err){
-	$("h1").after(`<p class="error">Issue with ${err.location}. ${err.message}.</p>`);
+	$("form h1").after(`<p class="error">Issue with ${err.location}. ${err.message}.</p>`);
 }
 
 function postUser(user){

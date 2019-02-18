@@ -16,20 +16,31 @@ function updateEntry(entry){
 	});
 }
 
+function displayError(){
+	$("form h1").after(`<p class="error">There was a problem with one or more off your fields. Please make sure no fields are empty.</p>`);
+}
+
+function fieldIsEmpty(){
+	return $('input').val() == "" || $('textarea').val() == "";
+}
+
 function watchEditForm(){
 	$('#edit-entry').submit(function(e){
 		e.preventDefault();
-		let date = $("#date-input").val();
-		let workingOn = $("#working-on-input").val();
-		let feelings = $("#feelings-input").val();
-		let lookingForward = $("#looking-forward-input").val();
-		updateEntry({
-			date,
-			workingOn,
-			feelings,
-			lookingForward
-		});
-
+		if(fieldIsEmpty){
+			displayError();
+		}else{
+			let date = $("#date-input").val();
+			let workingOn = $("#working-on-input").val();
+			let feelings = $("#feelings-input").val();
+			let lookingForward = $("#looking-forward-input").val();
+			updateEntry({
+				date,
+				workingOn,
+				feelings,
+				lookingForward
+			});
+		}
 	});
 }
 function formatSingleDigit(num){

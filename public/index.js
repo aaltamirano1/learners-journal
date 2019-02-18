@@ -88,7 +88,7 @@ function displayHomePage(data){
 
 function displayError(){
 	$('.entry').remove();
-	$("h1").after(`<p class="error">Problem with your login information. Please try again.</p>`);
+	$("form h1").after(`<p class="error">Problem with your login information. Please try again.</p>`);
 }
 
 function getEntries(user_id){
@@ -134,12 +134,17 @@ function getToken(user){
 		headers: {
 			"content-type": "application/json"
 		}
-	}).then(res=>{
-		return res.json();
-	}).then(data=>{
+	})
+	.then(res=> res.json)
+	.then(data=>{
 		localStorage.authToken = data.authToken;
 		getUserId(_user); 
 	})
+	.catch(err=>{
+		console.error(err);
+		$('form input').val("");
+		displayError();
+	});
 }
 
 function watchLoginForm(){
