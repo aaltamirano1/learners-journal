@@ -25,9 +25,10 @@ function fieldIsEmpty(){
 }
 
 function watchEditForm(){
-	$('#edit-entry').submit(function(e){
+	$('#edit-entry').on('submit', function(e){
+		$(".error").remove();
 		e.preventDefault();
-		if(fieldIsEmpty){
+		if(fieldIsEmpty()){
 			displayError();
 		}else{
 			let date = $("#date-input").val();
