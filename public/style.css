@@ -1,6 +1,7 @@
 *{
 	font-family: 'Nunito', sans-serif;
 	color: #515c68;
+	box-sizing: border-box;
 }
 
 body{
@@ -47,6 +48,7 @@ form{
 	background-color: #ffffcc;
 	border-bottom: 4px solid #f5e653;
 	padding: 15px;
+	max-width: 100%;
 	width: 400px;
 	display: flex;
 	flex-direction: column;
@@ -138,3 +140,15 @@ main{
   z-index: 1;
 }
 .dropdown:hover .dropdown-content {display: block;}
+
+@media screen and (max-width: 600px){
+	.home-page-nav{
+		justify-content: flex-end;
+	}
+	nav h1{
+		font-size: 1.2em;
+	}
+	.home-page-nav-heading{
+		display: none;
+	}
+}

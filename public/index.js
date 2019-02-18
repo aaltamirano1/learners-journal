@@ -61,8 +61,9 @@ function watchLogoutButton(){
 
 function changeNavLinks(){
 	$('nav').empty();
+	$('nav').addClass('home-page-nav');
 	$('nav').html(`
-		<h1>Learner's Journal</h1>
+		<h1 class="home-page-nav-heading">Learner's Journal</h1>
 		<ul>
  	 		<li><a href="new-entry.html"><button>New Entry</button></a></li>
  	 		<li><a class="logout-btn" href="index.html"><button>Log Out</button></a></li>

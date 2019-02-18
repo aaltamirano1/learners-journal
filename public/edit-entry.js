@@ -43,7 +43,7 @@ function watchEditForm(){
 		}
 	});
 }
-function formatSingleDigit(num){
+function formatSingleDigits(num){
 	if (num<10){
 		return "0"+(num);
 	}
