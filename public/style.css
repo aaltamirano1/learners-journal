@@ -152,4 +152,7 @@ main{
 	.home-page-nav-heading{
 		display: none;
 	}
+	form h1{
+		font-size: 1.7em;
+	}
 }
