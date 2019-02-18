@@ -32,29 +32,50 @@ function watchEditForm(){
 
 	});
 }
+function formatSingleDigit(num){
+	if (num<10){
+		return "0"+(num);
+	}
+	return num;
+}
+
 function formatDate(jsonDate){
 	const d = new Date(jsonDate);
 
-	let month = d.getMonth()+1;
-	if (month<10){
-		month = "0"+(month);
-	}
-	return date = d.getFullYear()+"-"+(month)+"-"+d.getDate();
+	let month = formatSingleDigit(d.getMonth()+1);
+	let day = formatSingleDigit(d.getDate()+1);
+
+	return date = d.getFullYear()+"-"+month+"-"+day;
 }
 
-function setPlaceholders(values){
-	const json = JSON.parse(values);
-	const date = formatDate(json.date);
-	localStorage.editId = json._id;
+function setPlaceholders(entry){
+	const date = formatDate(entry.date);
+	localStorage.editId = entry._id;
 
 	$("#date-input").val(date);
-	$("#working-on-input").val(json.workingOn);
-	$("#feelings-input").val(json.feelings);
-	$("#looking-forward-input").val(json.lookingForward);
+	$("#working-on-input").val(entry.workingOn);
+	$("#feelings-input").val(entry.feelings);
+	$("#looking-forward-input").val(entry.lookingForward);
+}
+
+function getEntry(id){
+	fetch(`/entries/${id}`)
+	.then(res=>{
+    if (res.ok) {
+      return res.json();
+    }
+    throw new Error(res.statusText);
+	})
+	.then(entry=>{
+		setPlaceholders(entry);
+	})
+	.catch(err=>{
+		console.error(err);
+	});
 }
 
 
 $(()=>{
-	setPlaceholders(localStorage.edit);
+	getEntry(localStorage.entryId);
 	watchEditForm();
 });

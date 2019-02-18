@@ -17,10 +17,10 @@ function watchDeleteButton(){
 	});
 }
 
-function watchEditButton(entry){
+function watchEditButton(){
 	$('.edit').unbind('click').bind('click', function(e){
-		console.log(entry);
-		localStorage.edit = JSON.stringify(entry);
+		let entryId = $(this).attr('data-entry-id');
+		localStorage.entryId = entryId;
 		window.location.replace('/edit-entry.html');
 	});
 }
@@ -37,7 +37,7 @@ function buttonSection(id){
 function formatDate(date){
 	const newDate = new Date(date);
 	const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'June', 'July', 'Aug', 'Sept', 'Oct', 'Nov', 'Dec'];
-  return  `${months[newDate.getMonth()]} ${newDate.getDate()}, ${newDate.getFullYear()}`;
+  return  `${months[newDate.getMonth()]} ${newDate.getDate()+1}, ${newDate.getFullYear()}`;
 }
 
 function displayEntry(entry){
@@ -50,8 +50,6 @@ function displayEntry(entry){
  			${buttonSection(entry._id)}
  		</li>
 	`);
-	watchEditButton(entry);
-	watchDeleteButton();
 }
 
 function watchLogoutButton(){
@@ -78,6 +76,8 @@ function displayHomePage(data){
 	$('#login').remove();
 	$('body').append('<main><ul class="entries"></ul></main>');
 	data.forEach(entry=>displayEntry(entry));
+	watchEditButton();
+	watchDeleteButton();
 }
 
 function displayError(){
@@ -86,7 +86,7 @@ function displayError(){
 }
 
 function getEntries(user_id){
-	fetch(`/entries/${user_id}`, {
+	fetch(`/entries/by-user/${user_id}`, {
 		headers: {
 			"Authorization": "Bearer "+localStorage.authToken
 		}

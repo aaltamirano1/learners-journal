@@ -19,6 +19,7 @@ router.post('/', jwtAuth, jsonParser, (req, res)=>{
       return res.status(400).send(msg);
     }
   });
+  console.log("req.body.date is: ",req.body.date);
   Entry
     .create({
       date: req.body.date,
@@ -76,9 +77,19 @@ router.get('/', (req, res) => {
     .catch(err => res.status(500).json({message: 'Internal server error when getting entries.'}));
 });
 
-router.get('/:user_id', (req, res) => {
+router.get('/by-user/:user_id', (req, res) => {
   return Entry.find({user: req.params.user_id}).sort({ date: -1 })
-    .then(entries => res.json(entries))
+    .then(entries => {
+      res.json(entries);
+    })
+    .catch(err => res.status(500).json({message: 'Internal server error when getting entries by user id.'}));
+});
+
+router.get('/:id', (req, res) => {
+  return Entry.findById(req.params.id)
+    .then(entries => {
+      res.json(entries);
+    })
     .catch(err => res.status(500).json({message: 'Internal server error when getting entry by user id.'}));
 });
 

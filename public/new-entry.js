@@ -25,6 +25,7 @@ function watchForm(){
 	$('#new-entry').submit(function(e){
 		e.preventDefault();
 		let date = $("#date-input").val();
+		console.log('#date-input is: ', date);
 		let workingOn = $("#working-on-input").val();
 		let feelings = $("#feelings-input").val();
 		let lookingForward = $("#looking-forward-input").val();
