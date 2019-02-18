@@ -122,3 +122,18 @@ main{
 .close i{
 	margin: 7px;
 }
+
+.dropdown{
+	position: relative;
+}
+.dropdown-content{
+	display: none;
+  position: absolute;
+  right: 0;
+  width: 250px;
+  box-shadow: 0 10px 28px silver;
+  padding: 5px;
+  background-color: #ffffcc;
+  z-index: 1;
+}
+.dropdown:hover .dropdown-content {display: block;}

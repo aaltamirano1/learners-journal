@@ -30,7 +30,7 @@ function postUser(user){
 	});
 }
 
-function watchForm(){
+function watchSignupForm(){
 	$('#signup').submit(function(e){
 		e.preventDefault();
 		$('.error').remove();
@@ -43,4 +43,4 @@ function watchForm(){
 	});
 }
 
-$(watchForm);
+$(watchSignupForm);

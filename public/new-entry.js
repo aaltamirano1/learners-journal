@@ -21,7 +21,7 @@ function postEntry(entry){
 	});
 }
 
-function watchForm(){
+function watchNewEntryForm(){
 	$('#new-entry').submit(function(e){
 		e.preventDefault();
 		let date = $("#date-input").val();
@@ -40,6 +40,6 @@ function watchForm(){
 }
 
 $(()=>{
-	watchForm();
+	watchNewEntryForm();
 	watchLogoutButton();
 });
