@@ -52,12 +52,12 @@ function formatSingleDigits(num){
 }
 
 function formatDate(jsonDate){
-	const d = new Date(jsonDate);
+	const date = new Date(jsonDate);
 
-	let month = formatSingleDigits(d.getMonth()+1);
-	let day = formatSingleDigits(d.getDate()+1);
+	let month = formatSingleDigits(date.getMonth()+1);
+	let day = formatSingleDigits(date.getUTCDate());
 
-	return date = d.getFullYear()+"-"+month+"-"+day;
+	return date.getFullYear()+"-"+month+"-"+date.getUTCDate();
 }
 
 function setPlaceholders(entry){
