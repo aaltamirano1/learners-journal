@@ -133,12 +133,13 @@ function getToken(user){
 		method: "post",
 		body: JSON.stringify(user),
 		headers: {
-			"content-type": "application/json"
+			'Content-Type': 'application/json'
 		}
 	})
-	.then(res=> res.json)
+	.then(res=> res.json())
 	.then(data=>{
 		localStorage.authToken = data.authToken;
+		console.log(data);
 		getUserId(_user); 
 	})
 	.catch(err=>{
