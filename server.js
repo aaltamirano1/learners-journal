@@ -40,12 +40,6 @@ app.get('/', function(req, res) {
     res.sendFile('index.html', {root: __dirname });
 });
 
-app.get('/entries/:user_id', (req, res) => {
-  return Entry.find({user: req.params.user_id})
-    .then(entries => res.json(entries))
-    .catch(err => res.status(500).json({message: 'Internal server error'}));
-});
-
 app.use('*', (req, res) => {
   return res.status(404).json({ message: 'Not Found' });
 });
