@@ -133,12 +133,13 @@ main{
 	display: none;
   position: absolute;
   right: 0;
-  top: 6px;
+  top: 32px;
   width: 250px;
   box-shadow: 0 10px 28px silver;
   padding: 5px;
   background-color: #ffffcc;
   z-index: 1;
+  text-align: center;
 }
 .dropdown:hover .dropdown-content {display: block;}
 
