@@ -51,15 +51,8 @@ function formatSingleDigits(num){
 	return num;
 }
 
-function formatDate(jsonDate){
-	const date = new Date(jsonDate);
-	let month = formatSingleDigits(date.getMonth()+1);
-	let day = formatSingleDigits(date.getUTCDate());
-	return date.getFullYear()+"-"+month+"-"+date.getUTCDate();
-}
-
 function setPlaceholders(entry){
-	const date = formatDate(entry.date);
+	const date = entry.date.slice(0,10);
 	localStorage.editId = entry._id;
 
 	$("#date-input").val(date);

@@ -35,9 +35,10 @@ function buttonSection(id){
 }
 
 function formatDate(date){
-	const newDate = new Date(date);
+	const day = parseInt(date.slice(8,10));
+	const month = parseInt(date.slice(5,7))-1;
 	const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'June', 'July', 'Aug', 'Sept', 'Oct', 'Nov', 'Dec'];
-  return  `${months[newDate.getMonth()+1]} ${newDate.getUTCDate()}, ${newDate.getFullYear()}`;
+  return  `${months[month]} ${day}, ${date.slice(0,4)}`;
 }
 
 function displayEntry(entry){
@@ -139,6 +140,7 @@ function getToken(user){
 	.then(res=> res.json())
 	.then(data=>{
 		localStorage.authToken = data.authToken;
+		console.log(data);
 		getUserId(_user); 
 	})
 	.catch(err=>{
