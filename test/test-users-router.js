@@ -44,14 +44,32 @@ describe('App', function(){
 	afterEach(function(){
 		return tearDownDb();
 	});
-	// NOTE: would be best to eliminate this endpoint at the end.
-	it("Should return users on GET users", function(){
+	it("Should create a user on POST /users", function(){
+		const newUser = {username: "testuser", password: "testpassword"};
 		return chai
 			.request(app)
-			.get('/users')
+			.post('/users')
+			.send(newUser)
 			.then(function(res){
-				expect(res).to.have.status(200);
+				expect(res).to.have.status(201);
 				expect(res).to.be.json;
+				expect(res.body).to.include.keys('id', 'username');
+				expect(res.body).to.deep.equal(Object.assign({id: res.body.id, username: "testuser"}));
 			});
 	});
+	it("Should return a user's id on GET /users/id/:username", function(){
+		return User.find()
+		.then(users=> users[0].username)
+		.then(username=>{
+			return chai
+					.request(app)
+					.get(`/users/id/${username}`)
+		})
+		.then(function(res){
+			console.log(res.body);
+			expect(res).to.have.status(200);
+			expect(res).to.be.json;
+			expect(res.body).to.be.a('string');
+		});
+	})
 });
