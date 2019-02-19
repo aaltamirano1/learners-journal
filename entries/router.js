@@ -71,12 +71,6 @@ router.put('/:id', jsonParser, (req, res)=>{
     });
 });
 
-router.get('/', (req, res) => {
-  return Entry.find()
-    .then(entries => res.json(entries))
-    .catch(err => res.status(500).json({message: 'Internal server error when getting entries.'}));
-});
-
 router.get('/by-user/:user_id', (req, res) => {
   return Entry.find({user: req.params.user_id}).sort({ date: -1 })
     .then(entries => {
