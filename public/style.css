@@ -8,6 +8,11 @@ body{
 	background-color: #ffe;
 }
 
+main{
+	max-width: 800px;
+	margin: auto;
+}
+
 ul{
 	list-style: none;
 	display: flex;
@@ -19,6 +24,17 @@ li{
 	padding: 0 4px;
 }
 
+button{
+	background-color: #ffff7e;
+	color: #6c7a89;
+	border: none;
+	border-bottom: 4px solid #f7ca18;
+	border-radius: 7px;
+	padding: 4px 12px;
+	cursor: pointer;
+}
+
+/*////////////////////////////////////////////////////////////////// NAV ///*/
 nav{
 	background-color: #26c281;
 	padding: 8px 15px;
@@ -43,16 +59,7 @@ nav h1{
 	left: 14px;
 }
 
-button{
-	background-color: #ffff7e;
-	color: #6c7a89;
-	border: none;
-	border-bottom: 4px solid #f7ca18;
-	border-radius: 7px;
-	padding: 4px 12px;
-	cursor: pointer;
-}
-
+/*////////////////////////////////////////////////////////////////// FORMS ///*/
 form{
 	margin: auto;
 	margin-top: 20px;
@@ -91,17 +98,27 @@ textarea{
 	text-align: left;
 }
 
-main{
-	max-width: 800px;
-	margin: auto;
-}
-
 .error{
 	color: red;
 	font-style: italic;
 	text-align: center;
 }
 
+.close{
+	color: transparent;
+	background-color: transparent;
+	border: none;
+	width: 100%;
+	display: flex;
+	justify-content: flex-end;
+	font-size: 1.5em;
+	margin-bottom: -25px;
+}
+.close i{
+	margin: 7px;
+}
+
+/*////////////////////////////////////////////////////////////////// HOMEPAGE or ENTRIES DISPLAY ///*/
 .entries{
 	display: flex;
 	flex-direction: column;
@@ -123,20 +140,7 @@ main{
 	margin: 7px;
 }
 
-.close{
-	color: transparent;
-	background-color: transparent;
-	border: none;
-	width: 100%;
-	display: flex;
-	justify-content: flex-end;
-	font-size: 1.5em;
-	margin-bottom: -25px;
-}
-.close i{
-	margin: 7px;
-}
-
+/*////////////////////////////////////////////////////////////////// LANDING or LOGIN PAGE ///*/
 #landing{
 	display: flex;
   padding: 20px 200px;
