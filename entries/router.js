@@ -54,14 +54,14 @@ router.put('/:id', jwtAuth, jsonParser, (req, res)=>{
   });
 
   Entry
-    .findOneAndUpdate({id: req.params.id}, {$set: toUpdate})
+    .findOneAndUpdate({_id: req.params.id}, {$set: toUpdate})
     .then(updatedEntry=>{
       console.log(`Updated item with id ${req.params.id}.`);
       res.status(200).json({
-        date: toUpdate.date,
-        workingOn: toUpdate.workingOn,
-        feelings: toUpdate.feelings,
-        lookingForward: toUpdate.lookingForward
+        date: updatedEntry.date,
+        workingOn: updatedEntry.workingOn,
+        feelings: updatedEntry.feelings,
+        lookingForward: updatedEntry.lookingForward
       });
     })
     .catch(err => {

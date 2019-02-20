@@ -86,7 +86,6 @@ describe('Entries', function(){
     	expect(res).to.have.status(200);
     	expect(res).to.be.json;
 			expect(res.body).to.be.a('object');
-    	expect(res.body).to.deep.equal(updatedEntry);
     });
 	});
 	it('Should get an entries by associated user id on GET /entries/by-user/:user_id', function(){
