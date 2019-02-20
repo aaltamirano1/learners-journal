@@ -64,6 +64,32 @@ describe('Users', function(){
 				expect(res.body.message).to.equal("Must be at least 10 characters long");
 			});
 	});
+	it("Should indicate issue on POST /users if username starts/ends in whitespace", function(){
+		const newUser = {username: "testuser ", password: "testpassword"};
+		return chai
+			.request(app)
+			.post('/users')
+			.send(newUser)
+			.then(function(res){
+				expect(res).to.have.status(422);
+				expect(res).to.be.json;
+				expect(res.body).to.include.keys('code', 'reason', 'message', 'location');
+				expect(res.body.message).to.equal("Cannot start or end with whitespace");
+			});
+	});
+		it("Should indicate issue on POST /users if password starts/ends in whitespace", function(){
+		const newUser = {username: "testuser ", password: " testpassword"};
+		return chai
+			.request(app)
+			.post('/users')
+			.send(newUser)
+			.then(function(res){
+				expect(res).to.have.status(422);
+				expect(res).to.be.json;
+				expect(res.body).to.include.keys('code', 'reason', 'message', 'location');
+				expect(res.body.message).to.equal("Cannot start or end with whitespace");
+			});
+	});
 	it("Should return a user's id on GET /users/id/:username", function(){
 		let userId;
 		return User.find()
