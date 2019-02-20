@@ -33,18 +33,54 @@ describe('Users', function(){
 				expect(res.body).to.deep.equal(Object.assign({id: res.body.id, username: "testuser"}));
 			});
 	});
+	it("Should indicate issue on POST /users if username already taken", function(){
+		User.find()
+		.then(users=>{
+			return {username: users[0].username, password: "testpassword"};
+		})
+		.then(newUser=>{
+			return chai
+			.request(app)
+			.post('/users')
+			.send(newUser)
+		})
+		.then(function(res){
+			expect(res).to.have.status(422);
+			expect(res).to.be.json;
+			expect(res.body).to.include.keys('code', 'reason', 'message', 'location');
+			expect(res.body.message).to.equal("Username already taken");
+		});
+	});
+	it("Should indicate issue on POST /users if password too short", function(){
+		const newUser = {username: "testuser", password: "test"};
+		return chai
+			.request(app)
+			.post('/users')
+			.send(newUser)
+			.then(function(res){
+				expect(res).to.have.status(422);
+				expect(res).to.be.json;
+				expect(res.body).to.include.keys('code', 'reason', 'message', 'location');
+				expect(res.body.message).to.equal("Must be at least 10 characters long");
+			});
+	});
 	it("Should return a user's id on GET /users/id/:username", function(){
+		let userId;
 		return User.find()
-		.then(users=> users[0].username)
+		.then(users=> {
+			userId = users[0].id;
+			return users[0].username;
+		})
 		.then(username=>{
 			return chai
 					.request(app)
 					.get(`/users/id/${username}`)
 		})
 		.then(function(res){
-			console.log(res.body);
 			expect(res).to.have.status(200);
 			expect(res).to.be.json;
+			expect(res.body).to.be.a('string');
+			expect(res.body).to.equal(userId);
 		});
 	})
 });

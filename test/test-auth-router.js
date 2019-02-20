@@ -30,7 +30,6 @@ describe('Auth', function(){
 			};
 		})
 		.then(user=>{
-			console.log("USER: ", user);
 			return chai
 			.request(app)
 			.post('/auth/login')
