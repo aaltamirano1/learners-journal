@@ -45,9 +45,9 @@ describe('Users', function(){
 			.send(newUser)
 		})
 		.then(function(res){
-			expect(res).to.have.status(422);
 			expect(res).to.be.json;
 			expect(res.body).to.include.keys('code', 'reason', 'message', 'location');
+			expect(res.body.code).to.equal(422);
 			expect(res.body.message).to.equal("Username already taken");
 		});
 	});
@@ -58,9 +58,10 @@ describe('Users', function(){
 			.post('/users')
 			.send(newUser)
 			.then(function(res){
-				expect(res).to.have.status(422);
 				expect(res).to.be.json;
+				expect(res).to.have.status(422);
 				expect(res.body).to.include.keys('code', 'reason', 'message', 'location');
+				expect(res.body.code).to.equal(422);
 				expect(res.body.message).to.equal("Must be at least 10 characters long");
 			});
 	});
