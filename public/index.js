@@ -47,11 +47,11 @@ function displayEntry(entry){
 	$('.entries').append(`
 		<li>
  			<p class="date"><em>${formatDate(entry.date)}</em></p>
- 			<h3>Working on...</h3> 
+ 			<h4>Working On:</h4> 
  			<p>${entry.workingOn}</p>
- 			<h3>Feelings on it...</h3>
+ 			<h4>Feelings On It:</h4>
  			<p> ${entry.feelings}</p>
- 			<h3>Looking forward to...</h3>
+ 			<h4>Looking Forward To:</h4>
  			<p>${entry.lookingForward}</p>
  			${buttonSection(entry._id)}
  		</li>
