@@ -22,6 +22,7 @@ function postUser(user){
 		return res.json();
 	}).then(data=>{
 		if(data.code){
+			$('.error').remove();
 			displayError(data);
 		}else{
 			console.log(data);

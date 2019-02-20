@@ -36,7 +36,7 @@ function postEntry(entry){
 
 function watchNewEntryForm(){
 	$('#new-entry').submit(function(e){
-		$(".error").remove();
+		$('.error').remove();
 		e.preventDefault();
 		let date = $("#date-input").val();
 		let workingOn = $("#working-on-input").val();

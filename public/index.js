@@ -142,12 +142,14 @@ function getToken(user){
 	.catch(err=>{
 		console.error(err);
 		$('form input').val("");
+
 		displayError();
 	});
 }
 
 function watchLoginForm(){
 	$('#login').submit(function(e){
+		$('.error').remove();
 		e.preventDefault();
 		let username = $("#username-input").val();
 		let password = $("#password-input").val();

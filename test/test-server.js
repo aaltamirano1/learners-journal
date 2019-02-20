@@ -80,4 +80,4 @@ describe('App', function(){
 	});
 });
 
-module.exports = {TEST_DATABASE_URL, User, Entry, app, runServer, closeServer, tearDownDb, seedUserData}
+module.exports = {TEST_DATABASE_URL, User, Entry, app, runServer, closeServer, tearDownDb, seedUserData, seedEntryData}
