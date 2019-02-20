@@ -46,10 +46,13 @@ function formatDate(date){
 function displayEntry(entry){
 	$('.entries').append(`
 		<li>
- 			<p><em>${formatDate(entry.date)}</em></p>
- 			<p><strong>Working on:</strong> ${entry.workingOn}</p>
- 			<p><strong>Feelings on it: </strong> ${entry.feelings}</p>
- 			<p><strong>Looking forward to:</strong> ${entry.lookingForward}</p>
+ 			<p class="date"><em>${formatDate(entry.date)}</em></p>
+ 			<h3>Working on...</h3> 
+ 			<p>${entry.workingOn}</p>
+ 			<h3>Feelings on it...</h3>
+ 			<p> ${entry.feelings}</p>
+ 			<h3>Looking forward to...</h3>
+ 			<p>${entry.lookingForward}</p>
  			${buttonSection(entry._id)}
  		</li>
 	`);
@@ -160,7 +163,6 @@ function watchLoginForm(){
 		});
 	});
 }
-
 
 $(()=>{
 	if(localStorage.authToken){

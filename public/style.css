@@ -131,6 +131,14 @@ textarea{
 	border-bottom: 4px solid #f5e653;
 }
 
+.entries h3{
+	margin-bottom: -13px;	
+}
+
+.date{
+	font-size: 1.2em;
+}
+
 .button-box{
 	display: flex;
 	justify-content: flex-end;
