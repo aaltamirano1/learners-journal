@@ -11,27 +11,26 @@
   </head>
   <body>
     <nav>
-      <h1>Learner's Journal</h1>
-      <ul>
-        <li><a href="signup.html"><button>Sign Up</button></a></li>
-        <li><div class="dropdown">
-          <button class="dropdown-btn">?</button>
-          <div class="dropdown-content">
-            <p>This is a journal for anyone who is trying to learn a new skill or improve on a skill. It is meant to provide a helpful way to track your progress. You may find it especially useful and encouraging to look back on things you struggled with at some point in the past.</p>
-          </div>
-        </div></li>
-      </ul>
+      <h1 class="login-screen-heading">Learner's Journal</h1>
+      <a href="signup.html"><button>Sign Up</button></a>
     </nav>
-    <form id="login">
-      <h1>Login</h1>
-      <label for="username-input">Username:</label>
-      <input type="text" name="username" id="username-input" required>
-      <br>
-      <label for="password-input">Password:</label>
-      <input type="password" name="password" id="password-input" required>
-      <br>
-      <button type="submit">Submit</button>
-    </form>
+    <main id="landing">
+      <section>
+        <h1 class="landing-text">Welcome to your Learner's Journal!</h1>
+        <p class="landing-text">This is a journal for anyone who is trying to learn a new skill or improve on a skill. It is meant to provide a helpful way to track your progress.</p>
+        <p class="landing-text">You may find it especially useful and encouraging to look back on things you struggled with at some point in the past.</p>
+      </section>
+      <form id="login">
+        <h1>Login</h1>
+        <label for="username-input">Username:</label>
+        <input type="text" name="username" id="username-input" required>
+        <br>
+        <label for="password-input">Password:</label>
+        <input type="password" name="password" id="password-input" required>
+        <br>
+        <button type="submit">Submit</button>
+      </form>
+    </main>
     <script
   src="https://code.jquery.com/jquery-3.3.1.min.js"
   integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="

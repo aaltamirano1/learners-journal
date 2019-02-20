@@ -1,8 +1,8 @@
 function linkToLogin(){
 	$('body').empty();
 	$('body').append(`
-		<main>
-			<p>Signed up successfully! Go back to <a href="index.html">login</a></p>
+		<main id="signup-success">
+			<p>Signed up successfully! Go back to <a href="index.html">login</a>.</p>
 		</main>
 	`);
 }

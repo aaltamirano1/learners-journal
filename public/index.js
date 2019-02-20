@@ -65,17 +65,10 @@ function changeNavLinks(){
 	$('nav').empty();
 	$('nav').addClass('home-page-nav');
 	$('nav').html(`
-		<h1 class="home-page-nav-heading">Learner's Journal</h1>
+		<h1 class="nav-heading">Learner's Journal</h1>
 		<ul>
  	 		<li><a href="new-entry.html"><button>New Entry</button></a></li>
- 	 		<li><a class="logout-btn" href="index.html"><button>Log Out</button></a></li>
- 	 		<li><div class="dropdown">
-        <button class="dropdown-btn">?</button>
-        <div class="dropdown-content">
-          <h4>Welcome to your Learner's Journal!</h4>
-          <p>This is a journal for anyone who is trying to learn a new skill or improve on a skill. It is meant to provide a helpful way to track your progress. You may find it especially useful and encouraging to look back on things you struggled with at some point in the past.</p>
-        </div>
-      </div></li> 	 		
+ 	 		<li><a class="logout-btn" href="index.html"><button>Log Out</button></a></li> 		
  	 	</ul>`);
 	watchLogoutButton();
 }
@@ -83,7 +76,7 @@ function changeNavLinks(){
 function displayHomePage(data){
 	changeNavLinks();
 	$('#login').remove();
-	$('main').remove();
+	$('main').fadeOut();
 	$('body').append('<main><ul class="entries"></ul></main>');
 
 	data.forEach(entry=>displayEntry(entry));
