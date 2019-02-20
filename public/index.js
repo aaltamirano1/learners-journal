@@ -5,7 +5,8 @@ function watchDeleteButton(){
 		fetch(`/entries/${id}`, {
 			method: "DELETE",
 			headers: {
-				'Content-Type': 'application/json'
+				'Content-Type': 'application/json',
+				'Authorization': 'Bearer '+localStorage.authToken
 			}
 		}).then(res=>{
 			const message = res.json.message ? ": "+res.json.message : "";

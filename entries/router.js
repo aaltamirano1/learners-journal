@@ -19,7 +19,6 @@ router.post('/', jwtAuth, jsonParser, (req, res)=>{
       return res.status(400).send(msg);
     }
   });
-  console.log("req.body.date is: ",req.body.date);
   Entry
     .create({
       date: req.body.date,
@@ -36,7 +35,7 @@ router.post('/', jwtAuth, jsonParser, (req, res)=>{
 
 });
 
-router.put('/:id', jsonParser, (req, res)=>{
+router.put('/:id', jwtAuth, jsonParser, (req, res)=>{
   const requiredFields = ['date', 'workingOn', 'feelings', 'lookingForward'];
   requiredFields.forEach(field => {
     if(!(field in req.body)){
@@ -87,7 +86,7 @@ router.get('/:id', (req, res) => {
     .catch(err => res.status(500).json({message: 'Internal server error when getting entry by id.'}));
 });
 
-router.delete('/:id', (req, res)=>{
+router.delete('/:id', jwtAuth, (req, res)=>{
   Entry.findByIdAndRemove(req.params.id)
     .then(()=>{
       console.log(`Deleted entry with id ${req.params.id}.`);
