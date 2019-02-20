@@ -6,6 +6,6 @@ deploy:
   provider: heroku
   api_key:
     secure: jr80C+xuDTRuMpNlpZXCVZyk3zxFLSQdnh9eL+xdCQPuQ5NKsq9dE8lfO4YcBNu2MHmfTzs3mjZ8YCH88RXQVGLZyq1s/wb85KgCbpToHrejygnvlJQ/LXTkKyWzDu+n4Ji0oxu5lR43Ctj+XEtuGlJ8GdnxkC5OD24kExrzYtMb9XA2QPTM4HFNVNTfu2nO3j2gsV5a06JVp5Mqolz0rT1yREccgirlhqYZyXgFzw6PSyIgW36symeQU+A2PAPWmnVAEPGxaKhzEfzNHyUKRHdFXA+hdjG2tk3GdjbvM3bE63W+uqYMRPy75Yth+O6I38NgRgZjyKRvcGCO0BSZH9VMgQ7bdSKqu+ObqXBzg1ewz5amC+IU0YHfuvB32zEu3Om5T2p/fkm/nYxjvkv5nPMQj1g/oXWvNhau5iU4nYVmXMQ23K3+WQQ8RaGUUqYBqRc524sCTiW7CA6kgSUp6cgY+0+1h4g83DeCLalzUG3DADqpxmmtPSmno+WVW8GRtUIY2WUiG4a35kUG89XJ5MfzvJzzAXVWpuGGxVZlvpxhu7fT8A3pBj+qEGybgbjU8vihOMr2c6MjaJxYKNvH60fC4a+4DOlem4VDC3VNazJ+PA95/lfwmcWpmT29dllkyD3TCl2iseERPY+XkwgHgOrMuKcT7IpIaMLYjIOwvl4=
-  app: salty-anchorage-10381
+  app: learners-journal
   on:
     repo: aaltamirano1/learners-journal
