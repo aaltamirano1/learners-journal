@@ -3,14 +3,13 @@ const chaiHttp = require('chai-http');
 const faker = require('faker');
 const mongoose = require('mongoose');
 const jwt = require('jsonwebtoken');
-const { app, runServer, closeServer	} = require("../server");
-const {User} = require('../users/model');
-const {Entry} = require('../entries/model');
 const {TEST_DATABASE_URL, JWT_SECRET} = require('../config');
-const {tearDownDb, seedUserData} = require("./test-server");
+const {User, Entry, app, runServer, closeServer, tearDownDb, seedUserData} = require("./test-server");
 
 const expect = chai.expect;
 chai.use(chaiHttp);
+
+//const token = jwt.sign( { user: { username, firstName, lastName } }, JWT_SECRET, { algorithm: 'HS256', subject: username, expiresIn: '7d' } )
 
 function seedEntryData(users) {
   console.info('seeding entry data');
