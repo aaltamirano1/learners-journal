@@ -2,39 +2,15 @@ const chai = require('chai');
 const chaiHttp = require('chai-http');
 const faker = require('faker');
 const mongoose = require('mongoose');
+const jwt = require('jsonwebtoken');
 const { app, runServer, closeServer	} = require("../server");
 const {User} = require('../users/model');
 const {Entry} = require('../entries/model');
-const {TEST_DATABASE_URL} = require('../config');
+const {TEST_DATABASE_URL, JWT_SECRET} = require('../config');
+const {tearDownDb, seedUserData} = require("./test-server");
 
 const expect = chai.expect;
 chai.use(chaiHttp);
-
-function tearDownDb() {
-  return new Promise((resolve, reject) => {
-    console.warn('Deleting database');
-    mongoose.connection.dropDatabase()
-      .then(result => resolve(result))
-      .catch(err => reject(err));
-  });
-}
-
-function seedUserData() {
-  console.info('seeding entry data');
-  return User.hashPassword("testpassword")
-  .then(password=>{
-    const seedData = [];
-    for (let i = 1; i <= 10; i++) {
-      seedData.push({
-        username: faker.internet.userName().toLowerCase(),
-         password: password
-      });
-    }
-    // this will return a promise
-    return User.insertMany(seedData);    
-  });
-
-}
 
 function seedEntryData(users) {
   console.info('seeding entry data');
@@ -52,7 +28,7 @@ function seedEntryData(users) {
   return Entry.insertMany(seedData);
 }
 
-describe('App', function(){
+describe('Entries', function(){
 	before(function(){
 		return runServer(TEST_DATABASE_URL);
 	});
@@ -69,15 +45,30 @@ describe('App', function(){
 		return tearDownDb();
 	});
 
-	it("Should give a 200 status code and HTML at the root URL", function(){
-		return chai
-			.request(app)
-			.get('/')
-			.then(function(res){
-				expect(res).to.have.status(200);
-				expect(res).to.be.html;
-			});
-	});
-});
+	it('Should create an entry on POST', function(){
+	
 
-module.exports = {tearDownDb, seedUserData}
+	return User.find()
+	.then(users=>{
+		const token = jwt.sign( { user: users[0] }, JWT_SECRET, { algorithm: 'HS256', subject: users[0].username, expiresIn: '7d' } );
+		return chai
+    .request(app)
+    .post('/entries')
+    .set('authorization', `Bearer ${token}`)
+    .send({
+    	date: new Date(),
+    	workingOn: "Integration",
+    	feelings: "Great",
+    	lookingForward: "Capstone",
+    })
+  	})
+    .then(res=>{
+    	expect(res).to.have.status(201);
+    })
+	});
+
+
+
+
+
+});

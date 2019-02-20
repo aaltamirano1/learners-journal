@@ -9,7 +9,7 @@ const router = express.Router();
 
 const jsonParser = bodyParser.json();
 
-
+// reqs jwt sign to test
 router.post('/', jwtAuth, jsonParser, (req, res)=>{
   const requiredFields = ['date', 'workingOn', 'feelings', 'lookingForward'];
   requiredFields.forEach(field => {
@@ -84,7 +84,7 @@ router.get('/:id', (req, res) => {
     .then(entries => {
       res.json(entries);
     })
-    .catch(err => res.status(500).json({message: 'Internal server error when getting entry by user id.'}));
+    .catch(err => res.status(500).json({message: 'Internal server error when getting entry by id.'}));
 });
 
 router.delete('/:id', (req, res)=>{

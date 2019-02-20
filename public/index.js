@@ -10,7 +10,7 @@ function watchDeleteButton(){
 		}).then(res=>{
 			const message = res.json.message ? ": "+res.json.message : "";
 			console.log(`${res.status}${message}`);
-			window.location.reload();
+			getEntries(localStorage.user_id);
 		}).catch(err=>{
 			console.error(err);
 		});
@@ -35,6 +35,7 @@ function buttonSection(id){
 }
 
 function formatDate(date){
+	console.log(date);
 	const day = parseInt(date.slice(8,10));
 	const month = parseInt(date.slice(5,7))-1;
 	const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'June', 'July', 'Aug', 'Sept', 'Oct', 'Nov', 'Dec'];
@@ -82,7 +83,9 @@ function changeNavLinks(){
 function displayHomePage(data){
 	changeNavLinks();
 	$('#login').remove();
+	$('main').remove();
 	$('body').append('<main><ul class="entries"></ul></main>');
+
 	data.forEach(entry=>displayEntry(entry));
 	watchEditButton();
 	watchDeleteButton();

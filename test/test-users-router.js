@@ -31,7 +31,7 @@ function seedUserData() {
   return User.insertMany(seedData);
 }
 
-describe('App', function(){
+describe('Users', function(){
 	before(function(){
 		return runServer(TEST_DATABASE_URL);
 	});
@@ -69,7 +69,6 @@ describe('App', function(){
 			console.log(res.body);
 			expect(res).to.have.status(200);
 			expect(res).to.be.json;
-			expect(res.body).to.be.a('string');
 		});
 	})
 });
