@@ -44,4 +44,11 @@ function watchSignupForm(){
 	});
 }
 
-$(watchSignupForm);
+$(()=>{
+	if(localStorage.authToken){
+		// if logged in and player accesses this page, redirect to home page.
+		location.replace("/index.html");
+	}else{		
+		watchSignupForm();
+	}
+});
