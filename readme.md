@@ -19,6 +19,7 @@ If you only want a demo, login with the username <b>demoapp</b> and the password
 - jQuery and plain HTML/CSS
 - [Chai](https://www.chaijs.com/) and [Mocha](https://mochajs.org/) for testing requests to endpoints.
 - [Faker](https://github.com/marak/Faker.js/) to seed test databases fake user and journal entries.
+- [TravisCI](https://travis-ci.org/) for continuous integration, pushes to heroku if all tests pass.
 
 ## Screenshots
 ![Imgur Image](https://imgur.com/MbVbuiF.jpg).
