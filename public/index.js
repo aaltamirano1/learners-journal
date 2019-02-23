@@ -166,8 +166,10 @@ function watchLoginForm(){
 
 $(()=>{
 	if(localStorage.authToken){
+		// display home page
 		getEntries(localStorage.user_id);
 	}else{
+		// display login page
 		$('#landing').css('display', 'flex');
 		watchLoginForm();
 	}
