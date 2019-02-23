@@ -168,6 +168,19 @@ textarea{
 	color: #eee;
 }
 
+/*////////////////////////////////////////////////////////////////// SIGNUP PAGE ///*/
+#signup-success{
+  margin-top: 100px;
+  text-align: center;
+  font-size: 2em;
+}
+#signup-success p{
+  color: #ddd;
+}
+#signup-success a{
+  color: white;
+}
+
 @media screen and (max-width: 600px){
 	.login-screen-heading{
 		position: absolute;
