@@ -45,12 +45,6 @@ function watchEditForm(){
 		}
 	});
 }
-function formatSingleDigits(num){
-	if (num<10){
-		return "0"+(num);
-	}
-	return num;
-}
 
 function setPlaceholders(entry){
 	const date = entry.date.slice(0,10);
@@ -78,8 +72,12 @@ function getEntry(id){
 	});
 }
 
-
 $(()=>{
-	getEntry(localStorage.entryId);
-	watchEditForm();
+	if(localStorage.authToken){
+		getEntry(localStorage.entryId);
+		watchEditForm();
+	}else{
+		// if not logged in and player accesses this page, redirect to login.
+		location.replace("/index.html");
+	}
 });
