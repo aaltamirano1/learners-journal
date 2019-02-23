@@ -182,12 +182,18 @@ textarea{
 }
 
 @media screen and (max-width: 600px){
+	.nav-heading, 
 	.login-screen-heading{
 		position: absolute;
 		top: 15px;
 		left: 14px;
 		display: initial;
 	}
+
+	#home-page-heading{
+		display: none;
+	}
+
 	#landing{
 		padding: 0;
 	}
