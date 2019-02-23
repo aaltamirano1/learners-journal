@@ -42,6 +42,7 @@ function watchNewEntryForm(){
 		let workingOn = $("#working-on-input").val();
 		let feelings = $("#feelings-input").val();
 		let lookingForward = $("#looking-forward-input").val();
+		
 		postEntry({
 			date,
 			workingOn,
@@ -53,6 +54,11 @@ function watchNewEntryForm(){
 }
 
 $(()=>{
-	watchNewEntryForm();
-	watchLogoutButton();
+	if(localStorage.authToken){
+		watchNewEntryForm();
+		watchLogoutButton();
+	}else{
+		// if not logged in and player accesses this page, redirect to login.
+		location.replace("/index.html");
+	}
 });
