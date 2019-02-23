@@ -1,3 +1,10 @@
+function watchLogoutButton(){
+	$('.logout-btn').on('click', function(){
+		localStorage.clear();
+		window.location = '/';
+	});
+}
+
 function updateEntry(entry){
 	fetch(`/entries/${localStorage.editId}`, {
 		method: "PUT",
@@ -76,6 +83,7 @@ $(()=>{
 	if(localStorage.authToken){
 		getEntry(localStorage.entryId);
 		watchEditForm();
+		watchLogoutButton();
 	}else{
 		// if not logged in and player accesses this page, redirect to login.
 		location.replace("/index.html");
