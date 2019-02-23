@@ -17,6 +17,8 @@ If you only want a demo, login with the username <b>demoapp</b> and the password
 - [Bcrypt](https://www.npmjs.com/package/bcrypt) to  encrypt passwords and validate them when users log in.
 - [Body-Parser](https://www.npmjs.com/package/body-parser) for parsing json request bodies.
 - jQuery and plain HTML/CSS
+- [Chai](https://www.chaijs.com/) and [Mocha](https://mochajs.org/) for testing requests to endpoints.
+- [Faker](https://github.com/marak/Faker.js/) to seed test databases fake user and journal entries.
 
 ## Screenshots
 ![Imgur Image](https://imgur.com/MbVbuiF.jpg).
