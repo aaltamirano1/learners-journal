@@ -83,9 +83,14 @@ function displayHomePage(data){
 	$('main').fadeOut();
 	$('body').append('<main><ul class="entries"></ul></main>');
 
-	data.forEach(entry=>displayEntry(entry));
-	watchEditButton();
-	watchDeleteButton();
+	if(data.length===0){
+		$('.entries').append("<li class='no-entries'><h3>You have no journal entries yet. Click new entry to get started.</h3>");
+	} else{
+		data.forEach(entry=>displayEntry(entry));
+		watchEditButton();
+		watchDeleteButton();		
+	}
+	
 }
 
 function displayError(){

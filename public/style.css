@@ -131,6 +131,10 @@ textarea{
 	border-bottom: 4px solid #f5e653;
 }
 
+.entries .no-entries{
+	text-align: center;
+}
+
 .entries h4{
 	margin-bottom: -12px;	
 	font-size: 1em;
