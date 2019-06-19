@@ -6,7 +6,7 @@ You may find it especially useful and encouraging to look back on things you str
 
 ## Check It Out
 You can access it [here](https://learners-journal.herokuapp.com).  
-If you only want a demo, login with the username <b>demoapp</b> and the password <b>demopassword</b>.
+If you only want a demo, login with the username <b>demoapp</b> and the password <b>demopassword</b> or click the demo button at the top.
 
 ## Technologies Used
 - [Node.js](https://nodejs.org/en/) for package management.
