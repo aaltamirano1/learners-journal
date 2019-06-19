@@ -169,6 +169,16 @@ function watchLoginForm(){
 	});
 }
 
+function watchDemoButton(){
+	$('#demo').click(function(){
+		$('.error').remove();
+		getToken({
+			username: "demoapp",
+			password: "demopassword"
+		});
+	});
+}
+
 $(()=>{
 	if(localStorage.authToken){
 		// display home page
@@ -176,6 +186,7 @@ $(()=>{
 	}else{
 		// display login page
 		$('#landing').css('display', 'flex');
+		watchDemoButton();
 		watchLoginForm();
 	}
 });
